@@ -21,7 +21,7 @@ const Footer = () => {
   const services = [
     { name: 'Emergency Care', href: '#emergency' },
     { name: 'Surgery', href: '#surgery' },
-    { name: 'Pharmacy', href: '#pharmacy' },
+    { name: 'Pharmacy', href: '/pharmacy' },
     { name: 'Laboratory', href: '#laboratory' },
     { name: 'Radiology', href: '#radiology' }
   ];

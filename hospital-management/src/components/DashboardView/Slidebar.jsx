@@ -17,8 +17,7 @@ import {
   Squares2X2Icon
 } from '@heroicons/react/24/outline';
 
-const Sidebar = () => {
-  const [isCollapsed, setIsCollapsed] = useState(true);
+const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
   const [activeLink, setActiveLink] = useState('Home');
   const [userRole, setUserRole] = useState('');
   const [userName, setUserName] = useState('User');
@@ -141,7 +140,7 @@ const Sidebar = () => {
     { name: 'Patients', href: 'patient', icon: UserGroupIcon, badge: '124', forAdmin: true },
     { name: 'Doctors', href: 'doctors', icon: UserIcon, badge: '8', forAdmin: false }, // available to all
     { name: 'Appointments', href: 'appointments', icon: CalendarIcon, badge: '3', forAdmin: false }, // available to all
-    { name: 'Pharmacy', href: 'pharmacy', icon: BeakerIcon, badge: null, forAdmin: true },
+    { name: 'Pharmacy', href: 'pharmacy', icon: BeakerIcon, badge: null, forAdmin: false },
     { name: 'Billing', href: 'billing', icon: CurrencyRupeeIcon, badge: '5', forAdmin: true },
     { name: 'Reports', href: 'reports', icon: DocumentTextIcon, badge: null, forAdmin: true },
     { name: 'Analytics', href: 'analytics', icon: ChartBarIcon, badge: 'New', forAdmin: true },

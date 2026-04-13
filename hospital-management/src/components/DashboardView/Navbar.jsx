@@ -26,7 +26,7 @@ const Navbar = () => {
     { name: 'Patients', href: '#patients', icon: UserGroupIcon },
     { name: 'Doctors', href: '#doctors', icon: UserIcon },
     { name: 'Appointments', href: '#appointments', icon: CalendarIcon },
-    { name: 'Pharmacy', href: '#pharmacy', icon: BeakerIcon },
+    { name: 'Pharmacy', href: '/pharmacy', icon: BeakerIcon },
     { name: 'Billing', href: '#billing', icon: CurrencyRupeeIcon },
     { name: 'Reports', href: '#reports', icon: DocumentTextIcon },
   ];

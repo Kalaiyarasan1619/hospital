@@ -102,21 +102,19 @@ const AddDoctors = () => {
     "Anesthesiology",
   ];
 
-  /** Medical specialties for the Specialization dropdown (shown on Professional tab). */
   const specializationOptions = [
-    ...departments,
-    "General Surgery",
-    "Oncology",
-    "Urology",
-    "Nephrology",
-    "Gastroenterology",
-    "Pulmonology",
-    "Endocrinology",
-    "Rheumatology",
-    "Emergency Medicine",
-    "Infectious Diseases",
-    "Plastic Surgery",
-    "Sports Medicine",
+    "Cardiologist",
+    "General Physician",
+    "Orthopedic Surgeon",
+    "Dermatologist",
+    "Neurologist",
+    "Pediatrician",
+    "ENT Specialist",
+    "Gynecologist",
+    "Ophthalmologist",
+    "Psychiatrist",
+    "Radiologist",
+    "Anesthesiologist",
   ];
 
   const languageOptions = [
@@ -789,16 +787,16 @@ const AddDoctors = () => {
                       name="specialization"
                       value={formData.specialization}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 border-2 rounded-xl transition-all bg-white ${
+                      className={`w-full px-4 py-3 border-2 rounded-xl transition-all ${
                         errors.specialization
                           ? "border-red-500 focus:border-red-600"
                           : "border-gray-200 focus:border-purple-500 hover:border-gray-300"
                       } focus:outline-none focus:ring-4 focus:ring-purple-500/20`}
                     >
-                      <option value="">Select specialization</option>
-                      {specializationOptions.map((spec) => (
-                        <option key={spec} value={spec}>
-                          {spec}
+                      <option value="">Select Specialization</option>
+                      {specializationOptions.map((specialization) => (
+                        <option key={specialization} value={specialization}>
+                          {specialization}
                         </option>
                       ))}
                     </select>

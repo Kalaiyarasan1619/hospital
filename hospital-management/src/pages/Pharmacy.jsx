@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BeakerIcon, CubeIcon, TruckIcon, ShieldCheckIcon } from '@heroicons/react/24/outline';
 
 const PHARMACY_APIS = [
-  'http://localhost:9090/api/pharmacy/details',
-  'http://localhost:8083/api/pharmacy/details',
+  'http://localhost:8084/api/pharmacy/details',
 ];
 
 const iconByService = {
@@ -37,7 +36,7 @@ const Pharmacy = () => {
         }
       }
 
-      setError('Cannot reach pharmacy API. Start gateway (9090) or pharmacy service (8083), and check CORS/server logs.');
+      setError('Cannot reach pharmacy API. Start pharmacy service (8084), and check CORS/server logs.');
       setLoading(false);
     };
 

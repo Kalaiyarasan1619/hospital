@@ -60,18 +60,24 @@ const Login = ({ onLoginSuccess, onBack }) => {
 
     setLoading(true);
     try {
+      const normalizedEmail = formData.email.trim().toLowerCase();
+      const normalizedPassword = formData.password;
+
       if (isSignIn) {
         // --- LOGIN ---
         const res = await fetch('http://localhost:8080/api/auth/signin', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            email: formData.email,
-            password: formData.password
+            email: normalizedEmail,
+            password: normalizedPassword
           })
         });
 
-        if (!res.ok) throw new Error('Invalid credentials');
+        if (!res.ok) {
+          const errorText = await res.text();
+          throw new Error(errorText || 'Invalid credentials');
+        }
 
         const data = await res.json();
 
@@ -79,7 +85,7 @@ const Login = ({ onLoginSuccess, onBack }) => {
         const expiryTime = Date.now() + 2 * 60 * 60 * 1000; // 2 hrs
         const userData = {
           username: data.username || formData.email.split('@')[0],
-          email: formData.email,
+          email: normalizedEmail,
           expiry: expiryTime
         };
 
@@ -98,14 +104,18 @@ const Login = ({ onLoginSuccess, onBack }) => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             name: formData.username,
-            email: formData.email,
-            password: formData.password,
+            username: formData.username,
+            email: normalizedEmail,
+            password: normalizedPassword,
             repeatPassword: formData.confirmPassword,
-            roles: ['user']
+            role: ['user']
           })
         });
 
-        if (!res.ok) throw new Error('Signup failed');
+        if (!res.ok) {
+          const errorText = await res.text();
+          throw new Error(errorText || 'Signup failed');
+        }
 
         const data = await res.json();
         alert(data.message || "Signup successful! Please sign in.");

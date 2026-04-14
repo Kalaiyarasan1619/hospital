@@ -293,7 +293,7 @@ const PatientDetailsEdit = () => {
           profileImage: profileImage
         };
 
-        const response = await axios.put(`http://localhost:8082/api/patients/${patientId}`, payload, {
+        const response = await axios.put(`http://localhost:8083/api/patients/${patientId}`, payload, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`

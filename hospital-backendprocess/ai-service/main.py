@@ -10,14 +10,20 @@ import os
 from typing import Annotated, Optional
 
 from fastapi import FastAPI, Header
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from rag import ask_rag
 from db import store_data
 
-# CORS for browsers is handled by Spring Cloud Gateway (9090). Do not add CORSMiddleware here
-# or responses may carry duplicate Access-Control-Allow-Origin headers.
 app = FastAPI(title="Hospital RAG AI")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$",
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class Query(BaseModel):
     question: str

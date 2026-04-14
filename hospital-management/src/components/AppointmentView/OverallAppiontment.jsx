@@ -140,10 +140,10 @@ const OverallAppointment = () => {
   const appointments = useMemo(() => {
     return rawAppointments.map((row) => {
       const doc = doctorsById[row.doctorId];
-      const dateStr = formatIsoDate(row.visitDate);
+      const dateStr = formatIsoDate(row.visitDate || row.appointmentDate);
       return {
-        id: String(row.visitId),
-        visitId: row.visitId,
+        id: String(row.visitId ?? row.id),
+        visitId: row.visitId ?? row.id,
         patientId: row.patientId,
         patient: {
           name: row.patientName || 'Patient',
@@ -152,7 +152,7 @@ const OverallAppointment = () => {
           image: row.patientImage,
         },
         doctor: {
-          name: row.doctorName || 'Doctor',
+          name: row.doctorName || row.doctor_name || 'Doctor',
           specialization: doc?.specialization || '—',
           department: doc?.department || '—',
           image:
@@ -167,7 +167,7 @@ const OverallAppointment = () => {
         reason: row.treatmentType || 'Consultation',
         notes: '',
         roomNumber: row.patientMode === 'IP' ? 'IPD' : 'OPD',
-        appointmentNumber: row.visitId,
+        appointmentNumber: row.visitId ?? row.id,
         consultationFee: row.consultationFee,
         dischargeDate: row.dischargeDate,
       };

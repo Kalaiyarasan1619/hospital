@@ -3,6 +3,14 @@ import axios from "axios";
 import { FaUserMd, FaTimes, FaCalendarAlt, FaClock } from "react-icons/fa";
 import { CheckCircleIcon, XMarkIcon, ArrowPathIcon } from "@heroicons/react/24/outline";
 
+const PATIENT_API = "http://localhost:8082/api/patients";
+
+const getToken = () => {
+  let token = localStorage.getItem("token");
+  if (token) token = token.replace(/"/g, "");
+  return token;
+};
+
 // Doctor Assignment Modal Component
 const DoctorAssignmentModal = ({ isOpen, onClose, patientId, patientName, onAssign }) => {
   const [loading, setLoading] = useState(true);
@@ -23,7 +31,7 @@ const DoctorAssignmentModal = ({ isOpen, onClose, patientId, patientName, onAssi
       
       try {
         setLoading(true);
-        const token = localStorage.getItem("token");
+        const token = getToken();
         
         if (!token) {
           throw new Error("Authentication token not found");
@@ -111,18 +119,20 @@ const DoctorAssignmentModal = ({ isOpen, onClose, patientId, patientName, onAssi
     
     try {
       setSubmitting(true);
-      const token = localStorage.getItem("token");
+      const token = getToken();
       
       if (!token) {
         throw new Error("Authentication token not found");
       }
       
-      // Extract patient ID number from format P001
-      const patientIdNumber = patientId;
+      const normalizedPatientId = Number(patientId);
+      if (!Number.isInteger(normalizedPatientId) || normalizedPatientId <= 0) {
+        throw new Error("Invalid patient id selected");
+      }
       
       // Prepare data for assignment
       const assignmentData = {
-        patientId: parseInt(patientIdNumber),
+        patientId: normalizedPatientId,
         doctorId: selectedDoctor.id,
         appointmentDate: selectedDay,
         appointmentTime: selectedTime,
@@ -136,7 +146,7 @@ const DoctorAssignmentModal = ({ isOpen, onClose, patientId, patientName, onAssi
       // Make API call to assign doctor
       // Note: This is a placeholder URL - replace with your actual endpoint
       await axios.post(
-        "http://localhost:8082/api/patients/assign-doctor",
+        `${PATIENT_API}/assign-doctor`,
         assignmentData,
         {
           headers: {

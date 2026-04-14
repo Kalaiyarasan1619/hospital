@@ -1,12 +1,21 @@
 import { useCallback, useState } from 'react';
 import { SparklesIcon, PaperAirplaneIcon } from '@heroicons/react/24/outline';
 
-const GATEWAY_URLS = [
-  import.meta.env.VITE_GATEWAY_URL,
-  'http://localhost:9090',
-].filter(Boolean);
+const buildAskUrls = (rawBase) => {
+  if (!rawBase) return [];
+  const base = rawBase.replace(/\/$/, '');
+  if (base.endsWith('/ask')) return [base];
+  if (base.includes('/api/ai')) return [`${base}/ask`];
+  if (base.includes(':8000')) return [`${base}/ask`, `${base}/api/ai/ask`];
+  return [`${base}/api/ai/ask`, `${base}/ask`];
+};
 
-const buildAskUrl = (base) => `${base.replace(/\/$/, '')}/api/ai/ask`;
+const AI_SERVICE_URLS = [
+  ...buildAskUrls(import.meta.env.VITE_AI_SERVICE_URL),
+  'http://localhost:9090/api/ai/ask',
+  'http://localhost:8000/ask',
+  '/api/ai/ask',
+].filter(Boolean);
 
 export default function AiAssistant() {
   const [question, setQuestion] = useState('');
@@ -23,9 +32,9 @@ export default function AiAssistant() {
     setAnswer('');
 
     let lastErr = 'Could not reach the AI service.';
-    for (const base of GATEWAY_URLS) {
+    for (const base of AI_SERVICE_URLS) {
       try {
-        const res = await fetch(buildAskUrl(base), {
+        const res = await fetch(base, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ question: q }),
@@ -45,7 +54,7 @@ export default function AiAssistant() {
     }
 
     setError(
-      `${lastErr} Start Eureka + API Gateway (9090), run the Python ai-service on port 8000, and set VITE_GATEWAY_URL if needed.`,
+      `${lastErr} Use the API gateway endpoint (/api/ai/ask via port 9090) and ensure gateway + ai-service are running.`,
     );
     setLoading(false);
   }, [question]);
@@ -61,8 +70,8 @@ export default function AiAssistant() {
             <div>
               <h1 className="text-2xl font-bold text-gray-900">Hospital AI Assistant</h1>
               <p className="text-sm text-gray-600">
-                RAG answers from your indexed hospital knowledge. Traffic goes through the API
-                gateway at <code className="text-xs bg-gray-100 px-1 rounded">/api/ai/ask</code>.
+                RAG answers from your indexed hospital knowledge using the ai-service endpoint
+                <code className="text-xs bg-gray-100 px-1 rounded">/ask</code>.
               </p>
             </div>
           </div>

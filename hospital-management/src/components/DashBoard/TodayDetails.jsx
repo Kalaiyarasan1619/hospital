@@ -64,6 +64,7 @@ const TodayDetails = () => {
 
   const fetchDashboard = useCallback(async () => {
     const token = localStorage.getItem('token');
+    console.log(token, "Token");
     if (!token) {
       setLoadError('Sign in to load dashboard data.');
       setLoading(false);

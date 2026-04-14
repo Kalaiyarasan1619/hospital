@@ -73,7 +73,7 @@ const PatientDoctorHistory = () => {
           // Also fetch patient details if available
           try {
             const patientResponse = await axios.get(
-              `http://localhost:8082/api/patients/${id}`,
+              `http://localhost:8083/api/patients/${id}`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`

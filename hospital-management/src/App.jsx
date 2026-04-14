@@ -16,6 +16,7 @@ import ViewDoctor from './components/DoctorPageView/ViewDoctor'
 import PatientDetailsEdit from './components/Patient/PatientDetailsEdit'
 import PatientDoctorVistory from './components/Patient/PatientDoctorVistory'
 import Pharmacy from './pages/Pharmacy'
+import AiAssistant from './pages/AiAssistant'
 
 function App() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
@@ -56,6 +57,7 @@ function App() {
                 <Route path='/doctors/:id' element= {<ViewDoctor/>}/>
                 <Route path='/appointments' element={<Appointment/>}/>
                 <Route path='/pharmacy' element={<Pharmacy/>}/>
+                <Route path='/ai-assistant' element={<AiAssistant/>}/>
               </Routes>
             </div>
           </div>

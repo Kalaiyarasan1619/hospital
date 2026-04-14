@@ -14,7 +14,8 @@ import {
   ArrowRightOnRectangleIcon,
   BellIcon,
   ChartBarIcon,
-  Squares2X2Icon
+  Squares2X2Icon,
+  SparklesIcon
 } from '@heroicons/react/24/outline';
 
 const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
@@ -141,6 +142,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
     { name: 'Doctors', href: 'doctors', icon: UserIcon, badge: '8', forAdmin: false }, // available to all
     { name: 'Appointments', href: 'appointments', icon: CalendarIcon, badge: '3', forAdmin: false }, // available to all
     { name: 'Pharmacy', href: 'pharmacy', icon: BeakerIcon, badge: null, forAdmin: false },
+    { name: 'AI Assistant', href: 'ai-assistant', icon: SparklesIcon, badge: 'RAG', forAdmin: false },
     { name: 'Billing', href: 'billing', icon: CurrencyRupeeIcon, badge: '5', forAdmin: true },
     { name: 'Reports', href: 'reports', icon: DocumentTextIcon, badge: null, forAdmin: true },
     { name: 'Analytics', href: 'analytics', icon: ChartBarIcon, badge: 'New', forAdmin: true },

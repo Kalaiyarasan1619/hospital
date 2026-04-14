@@ -1,0 +1,12 @@
+[submodule "hospital-backendprocess/doctor"]
+	path = hospital-backendprocess/doctor
+	url = https://github.com/Kalaiyarasan1619/hospital_backend_doctor.git
+[submodule "hospital-backendprocess/eureka"]
+	path = hospital-backendprocess/eureka
+	url = https://github.com/Kalaiyarasan1619/hospital_backend_eureka.git
+[submodule "hospital-backendprocess/hospital-backend-user"]
+	path = hospital-backendprocess/hospital-backend-user
+	url = https://github.com/Kalaiyarasan1619/hospital_backend_user.git
+[submodule "hospital-backendprocess/patient"]
+	path = hospital-backendprocess/patient
+	url = https://github.com/Kalaiyarasan1619/hospital_backend_patient.git
